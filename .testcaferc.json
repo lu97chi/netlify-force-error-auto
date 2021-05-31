@@ -1,5 +1,5 @@
 {
-    "browsers": ["edge"],
+    "browsers": ["chrome"],
     "src": "./fixtures/**/*.js",
     "skipJsErrors": true,
     "selectorTimeout": 30000,
