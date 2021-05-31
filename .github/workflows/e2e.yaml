@@ -1,26 +1,20 @@
-name: e2e tests
-on:
-  push:
-    branches:
-      - 'master'
+name: Target Multiple Node.js Versions and Operating Systems
+on: [push]
 
 jobs:
   build:
-    timeout-minutes: 10
-    runs-on: ubuntu-latest
-
+    name: Run Tests Across Node.js Versions and Operating Systems
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        node-version: [13.2.x]
-    
+        os: [ubuntu-latest]
+        node: [12]
     steps:
-      - uses: actions/checkout@v1
-
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
+      - uses: actions/setup-node@v1
         with:
-          node-version: ${{ matrix.node-version }}
-      - name: Run and test app
-        run: |
-          npm install
-          npm test
+          node-version: ${{ matrix.node }}
+      - uses: actions/checkout@v1
+      - name: Run TestCafe Tests
+        uses: DevExpress/testcafe-action@latest
+        with:
+          args: "chrome tests"
