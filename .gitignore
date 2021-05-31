@@ -1,0 +1,16 @@
+node_modules
+dist
+out
+.DS_Store
+.next
+out
+*.log
+*.swp
+package-lock.json
+.vscode
+.env
+_redirects
+
+# IDE specific directories and files
+.idea/
+/*.iml

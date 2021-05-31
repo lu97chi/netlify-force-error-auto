@@ -1,0 +1,7 @@
+{
+    "browsers": ["edge"],
+    "src": "./fixtures/**/*.js",
+    "skipJsErrors": true,
+    "selectorTimeout": 30000,
+    "assertionTimeout": 30000
+}
