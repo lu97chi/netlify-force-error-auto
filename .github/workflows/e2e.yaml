@@ -1,18 +1,18 @@
-name: Target Multiple Node.js Versions and Operating Systems
-on: [push]
-
+name: Remote Dispatch Action Responder
+ 
+on: [repository_dispatch]
+ 
 jobs:
-  build:
-    name: Run Tests Across Node.js Versions and Operating Systems
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest]
-        node: [12]
+  ping-pong:
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node }}
-      - uses: actions/checkout@v1
-      - name: Run TestCafe Tests
-        uses: DevExpress/testcafe-action@latest
+      - name: Event Information
+        run: |
+          echo "Event '${{ github.event.action }}' received from '${{ github.event.client_payload.repository }}'"
+      - name: PONG - Dispatch response to received PING
+        if: github.event.action == 'ping'
+        run: |
+          curl -X POST https://api.github.com/repos/marcnuri-demo/actions-remote-dispatch-a/dispatches \
+          -H 'Accept: application/vnd.github.everest-preview+json' \
+          -u ${{ secrets.ACCESS_TOKEN }} \
+          --data '{"event_type": "pong", "client_payload": { "repository": "'"$GITHUB_REPOSITORY"'" }}'
