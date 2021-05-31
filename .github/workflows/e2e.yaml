@@ -12,8 +12,8 @@ jobs:
       - name: Tests payload - Dispatch response to received run_e2e
         if: github.event.action == 'run_e2e'
         uses: actions/setup-node@v1
-          with:
-            node-version: ${{ matrix.node }}
+        with:
+          node-version: ${{ matrix.node }}
         uses: actions/checkout@v1
       - name: Run TestCafe Tests
         uses: DevExpress/testcafe-action@latest
