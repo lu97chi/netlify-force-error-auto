@@ -11,7 +11,7 @@ jobs:
           echo "Event '${{ github.event.action }}' received from '${{ github.event.client_payload.repository }}'"
       - name: Tests payload - Dispatch response to received run_e2e
         if: github.event.action == 'run_e2e'
-          steps:
+          run:
             - uses: actions/setup-node@v1
               with:
                 node-version: ${{ matrix.node }}
