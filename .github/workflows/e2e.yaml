@@ -10,11 +10,6 @@ jobs:
         run: |
           echo "Event '${{ github.event.action }}' received from '${{ github.event.client_payload.repository }}'"
       - name: Tests payload - Dispatch response to received run_e2e
-        runs-on: ${{ matrix.os }}
-          strategy:
-            matrix:
-              os: [ubuntu-latest]
-              node: [12]
         if: github.event.action == 'run_e2e'
           steps:
             - uses: actions/setup-node@v1
