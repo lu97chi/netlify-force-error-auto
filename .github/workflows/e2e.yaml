@@ -5,12 +5,10 @@ on: [repository_dispatch]
 jobs:
   e2e-status:
     runs-on: ubuntu-latest
-    if: github.event.action == 'run_e2e'
     steps:
       - name: Event Information
         run: |
           echo "Event '${{ github.event.action }}' received from '${{ github.event.client_payload.repository }}'" \
-          echo "Event ${{ toJson(request) }} all events"
       - uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node }}
