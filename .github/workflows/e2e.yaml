@@ -9,7 +9,8 @@ jobs:
     steps:
       - name: Event Information
         run: |
-          echo "Event '${{ github.event.action }}' received from '${{ github.event.client_payload.repository }}'"
+          echo "Event '${{ github.event.action }}' received from '${{ github.event.client_payload.repository }}'" \
+          echo "Event ${{github.event}} all events"
       - uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node }}
